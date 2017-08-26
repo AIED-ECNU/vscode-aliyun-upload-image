@@ -40,7 +40,6 @@ function start() {
     let filePath = fileUri.fsPath;
     let imagePath = getImagePath(filePath, selectText, localPath);
     const mdFilePath = editor.document.fileName;
-
     createImageDirWithImagePath(imagePath).then(imagePath => {
         saveClipboardImageToFileAndGetPath(imagePath, (imagePath) => {
             if (!imagePath) return;
@@ -54,10 +53,10 @@ function start() {
                     textEditorEdit.insert(editor.selection.active, img)
                 });
             }).catch((err) => {
-                vscode.window.showErrorMessage('Upload error.');
+                vscode.window.showErrorMessage('Upload error.' + err.message);
             });
         });
-    }).catch(err => {
+    }).catch(() => {
         vscode.window.showErrorMessage('Failed make folder.');
         return;
     });

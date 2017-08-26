@@ -26,4 +26,6 @@ ext install paste-image-to-aliyun
 
 将[vscode-paste-image](https://github.com/mushanshitiancai/vscode-paste-image)和[vscode-qiniu-upload-image](https://github.com/yscoder/vscode-qiniu-upload-image)综合改成了现在这个插件。
 
+
+
 如果用的开心给个star也不错！

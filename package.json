@@ -1,0 +1,93 @@
+{
+  "name": "paste-image-to-aliyun",
+  "displayName": "paste image to aliyun",
+  "description": "截图上传阿里云插件",
+  "version": "0.0.1",
+  "publisher": "dengchengmi",
+  "author": {
+    "name": "dengchengmi",
+    "email": "dcmjiayou@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/favers/vscode-aliyun-upload-image.git"
+  },
+  "homepage": "https://github.com/favers/vscode-aliyun-upload-image/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/favers/vscode-aliyun-upload-image/issues"
+  },
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.pasteImageToAliyun"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.pasteImageToAliyun",
+        "title": "Paste Image To Aliyun"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.pasteImageToAliyun",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "pasteImageToAliyun configuration",
+      "properties": {
+        "pasteImageToAliyun.fetchTokenUrl": {
+          "type": "string",
+          "default": "",
+          "description": "获取阿里云授权的URL"
+        },
+        "pasteImageToAliyun.endpoint": {
+          "type": "string",
+          "default": "",
+          "description": "endpoint"
+        },
+        "pasteImageToAliyun.bucket": {
+          "type": "string",
+          "default": "",
+          "description": "bucket"
+        },
+        "pasteImageToAliyun.localPath": {
+          "type": "string",
+          "default": "",
+          "description": "本地储存位置"
+        },
+        "pasteImageToAliyun.remotePath": {
+          "type": "string",
+          "default": "",
+          "description": "服务器储存位置"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "mocha": "^2.3.3",
+    "eslint": "^3.6.0",
+    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.32"
+  },
+  "dependencies": {
+    "ali-oss": "^4.10.0",
+    "axios": "^0.16.2",
+    "moment": "^2.18.1"
+  }
+}

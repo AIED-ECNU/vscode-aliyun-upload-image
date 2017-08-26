@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/favers/vscode-aliyun-upload-image.git"
+    "url": "https://github.com/dengchengmi/vscode-aliyun-upload-image.git"
   },
-  "homepage": "https://github.com/favers/vscode-aliyun-upload-image/blob/master/README.md",
+  "homepage": "https://github.com/dengchengmi/vscode-aliyun-upload-image",
   "bugs": {
-    "url": "https://github.com/favers/vscode-aliyun-upload-image/issues"
+    "url": "https://github.com/dengchengmi/vscode-aliyun-upload-image/issues"
   },
   "engines": {
     "vscode": "^1.11.0"

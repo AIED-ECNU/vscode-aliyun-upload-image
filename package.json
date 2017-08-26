@@ -3,9 +3,9 @@
   "displayName": "paste image to aliyun",
   "description": "截图上传阿里云插件",
   "version": "0.0.1",
-  "publisher": "dengchengmi",
+  "publisher": "jasonroger",
   "author": {
-    "name": "dengchengmi",
+    "name": "jasonroger",
     "email": "dcmjiayou@163.com"
   },
   "repository": {

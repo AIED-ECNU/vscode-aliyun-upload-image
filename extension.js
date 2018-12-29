@@ -6,8 +6,17 @@ const { spawn } = require('child_process');
 const aliyunUpload = require('./lib/upload');
 
 exports.activate = (context) => {
-    const disposable = vscode.commands.registerCommand('extension.pasteImageToAliyun', () => {
-        start();
+    console.log('aliyun-upload-image is active!')
+    const disposable = vscode.commands.registerCommand('extension.aliyun.upload', () => {
+        vscode.window.withProgress({
+			location: vscode.ProgressLocation.Notification,
+			title: "上传图片",
+			cancellable: false
+		}, (progress, token) => {
+            progress.report({ increment: 0 });
+			start(progress);
+		});
+        
     });
     context.subscriptions.push(disposable);
 }
@@ -15,7 +24,7 @@ exports.activate = (context) => {
 // this method is called when your extension is deactivated
 exports.deactivate = () => { }
 
-function start() {
+function start(progress) {
     // 获取当前编辑文件
     let editor = vscode.window.activeTextEditor;
     if (!editor) return;
@@ -31,7 +40,7 @@ function start() {
         vscode.window.showInformationMessage('Your selection is not a valid file name!');
         return;
     }
-    let config = vscode.workspace.getConfiguration('pasteImageToAliyun');
+    let config = vscode.workspace.getConfiguration('aliyun');
     let localPath = config['localPath'];
     if (localPath && (localPath.length !== localPath.trim().length)) {
         vscode.window.showErrorMessage('The specified path is invalid. "' + localPath + '"');
@@ -40,23 +49,36 @@ function start() {
     let filePath = fileUri.fsPath;
     let imagePath = getImagePath(filePath, selectText, localPath);
     const mdFilePath = editor.document.fileName;
+
+    progress.report({ increment: 10, message: "Uploading..." });
     createImageDirWithImagePath(imagePath).then(imagePath => {
+        progress.report({ increment: 10, message: "Uploading..." });
         saveClipboardImageToFileAndGetPath(imagePath, (imagePath) => {
             if (!imagePath) return;
             if (imagePath === 'no image') {
                 vscode.window.showInformationMessage('There is not a image in clipboard.');
+                progress.report({ increment: 100, message: "There is not a image in clipboard." });
                 return;
             }
+            progress.report({ increment: 80, message: "Uploading..." });
             aliyunUpload(config, imagePath, mdFilePath).then(({ name, url }) => {
+                progress.report({ increment: 99, message: "Uploading..." });
+                if (config.domain) {
+                    url = url.replace(`http://${config.bucket}.${config.region}.aliyuncs.com`, config.domain)
+                }
                 const img = `![${name}](${url})`;
                 editor.edit(textEditorEdit => {
                     textEditorEdit.insert(editor.selection.active, img)
                 });
+                progress.report({ increment: 100, message: "Complete upload!" });
+                vscode.window.showInformationMessage('Complete upload!');
             }).catch((err) => {
+                progress.report({ increment: 100, message: 'Upload error.' + err.message });
                 vscode.window.showErrorMessage('Upload error.' + err.message);
             });
         });
     }).catch(() => {
+        progress.report({ increment: 100, message: 'Failed make folder.' });
         vscode.window.showErrorMessage('Failed make folder.');
         return;
     });

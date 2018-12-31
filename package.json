@@ -2,7 +2,7 @@
   "name": "aliyun-oss-upload-image",
   "displayName": "aliyun oss upload image",
   "description": "截图上传阿里云oss插件",
-  "version": "0.0.15",
+  "version": "1.0.0",
   "publisher": "vvkee",
   "author": {
     "name": "vvkee",

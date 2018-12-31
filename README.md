@@ -11,6 +11,9 @@
 **accessKeySecret**
 **domain**
 
+不支持gif
+打算有时间支持下gif
+
 之前用的七牛云，但是七牛云改了需要备案域名且临时域名不支持超过30天后，我的图床就挂了。所以想迁移到阿里云中，但是在**dcmjiayou@163.com**版本中不支持最新版的阿里云RAM系统，所以fork下来自己改了一边，也参考了https://github.com/yscoder/vscode-qiniu-upload-image。
 
 (vscode的文档真不咋地。。。)

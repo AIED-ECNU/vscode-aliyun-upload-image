@@ -66,7 +66,7 @@ function start(progress) {
                 if (config.domain) {
                     url = url.replace(`http://${config.bucket}.${config.region}.aliyuncs.com`, config.domain)
                 }
-                const img = `![${name}](${url})`;
+                const img = `![${name}](https://${url})`;
                 editor.edit(textEditorEdit => {
                     textEditorEdit.insert(editor.selection.active, img)
                 });
